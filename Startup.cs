@@ -51,7 +51,8 @@ namespace LiquidApi
                 endpoints.MapControllers();
             });
 
-            LiquidApiContext context = app.ApplicationServices.GetService<LiquidApiContext>();
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            LiquidApiContext context = serviceScope.ServiceProvider.GetService<LiquidApiContext>();
             DataSeed.AddSeedData(context);
         }
     }
