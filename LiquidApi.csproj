@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Requests\" />
     <Folder Include="Factories\" />
+    <Folder Include="Models\Public\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
