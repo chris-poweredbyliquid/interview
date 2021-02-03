@@ -46,6 +46,8 @@ namespace LiquidApi
             Console.WriteLine($"[SEED] Added customer: {JsonConvert.SerializeObject(chris, Formatting.Indented)}");
             context.Customers.Add(brooke);
             Console.WriteLine($"[SEED] Added customer: {JsonConvert.SerializeObject(brooke, Formatting.Indented)}");
+
+            context.SaveChanges();
         }
     }
 }
