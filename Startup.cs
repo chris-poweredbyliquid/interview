@@ -12,6 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LiquidApi.Factories;
+using LiquidApi.Interfaces;
+using LiquidApi.Repositories;
+using LiquidApi.Services;
 
 namespace LiquidApi
 {
@@ -28,6 +32,10 @@ namespace LiquidApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton<CustomerFactory>();
+            services.AddScoped<CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddDbContext<LiquidApiContext>(opt => opt.UseInMemoryDatabase("LiquidDb", null));
         }

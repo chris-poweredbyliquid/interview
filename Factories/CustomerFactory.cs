@@ -5,7 +5,7 @@ namespace LiquidApi.Factories
 {
     public class CustomerFactory
     {
-        public Address GetAddress(Address address)
+        public Address GetAddress(Models.Address address)
         {
             return new Address
             {
@@ -19,7 +19,7 @@ namespace LiquidApi.Factories
             };
         }
 
-        public Customer GetCustomer(Customer customer)
+        public Customer GetCustomer(Models.Customer customer)
         {
             return new Customer
             {
