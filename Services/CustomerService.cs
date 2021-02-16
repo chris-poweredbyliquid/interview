@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace LiquidApi.Services
 {
-    class CustomerService : ICustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly ICustomerFactory _customerFactory;

@@ -4,7 +4,7 @@ using LiquidApi.Controllers.Responses;
 
 namespace LiquidApi.Services
 {
-    interface ICustomerService
+    public interface ICustomerService
     {
         Task<List<Address>> GetAddressesByCountry(string countryName);
 

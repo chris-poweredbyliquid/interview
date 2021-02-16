@@ -2,7 +2,7 @@
 
 namespace LiquidApi.Factories
 {
-    interface ICustomerFactory
+    public interface ICustomerFactory
     {
         Address GetAddress(Models.Address address);
 
