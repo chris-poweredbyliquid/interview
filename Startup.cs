@@ -1,4 +1,7 @@
 using LiquidApi.Context;
+using LiquidApi.Factories;
+using LiquidApi.Repositories;
+using LiquidApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +31,12 @@ namespace LiquidApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton<ICustomerFactory, CustomerFactory>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+            services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddDbContext<LiquidApiContext>(opt => opt.UseInMemoryDatabase("LiquidDb", null));
         }
