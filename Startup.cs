@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using LiquidApi.Context;
 using LiquidApi.Repositories;
 using LiquidApi.Factories;
+using LiquidApi.Services;
 
 namespace LiquidApi
 {
@@ -27,6 +28,7 @@ namespace LiquidApi
 
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<ICustomerFactory, CustomerFactory>();
+            services.AddTransient<ICustomerService, CustomerService>();
 
             services.AddDbContext<LiquidApiContext>(opt => opt.UseInMemoryDatabase("LiquidDb", null));
         }
