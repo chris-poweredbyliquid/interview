@@ -14,6 +14,8 @@ namespace LiquidApi
 {
     public class Startup
     {
+        internal const string AllowAnyOrigins = "_allowAnyOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,6 +26,19 @@ namespace LiquidApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    AllowAnyOrigins,
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             services.AddControllers();
 
             services.AddTransient<ICustomerRepository, CustomerRepository>();
@@ -45,11 +60,14 @@ namespace LiquidApi
 
             app.UseRouting();
 
+            app.UseCors();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers()
+                    .RequireCors(AllowAnyOrigins);
             });
 
             using var serviceScope = app.ApplicationServices.CreateScope();

@@ -8,10 +8,12 @@ using Microsoft.Extensions.Logging;
 using LiquidApi.Controllers.Requests;
 using LiquidApi.Controllers.Responses;
 using LiquidApi.Services;
+using Microsoft.AspNetCore.Cors;
 
 namespace LiquidApi.Controllers
 {
     [ApiController]
+    [EnableCors(Startup.AllowAnyOrigins)]
     [Route("customers")]
     public class CustomerController : ControllerBase
     {

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LiquidApi.Controllers.Responses
 {
@@ -11,5 +8,6 @@ namespace LiquidApi.Controllers.Responses
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
+        public Address Address { get; set; }
     }
 }

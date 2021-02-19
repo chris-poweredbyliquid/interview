@@ -16,7 +16,8 @@ namespace LiquidApi.Factories
                     Id = customer.Id,
                     FirstName = customer.FirstName,
                     LastName = customer.LastName,
-                    EmailAddress = customer.EmailAddress
+                    EmailAddress = customer.EmailAddress,
+                    Address = CreateAddress(customer.Address),
                 };
         }
 

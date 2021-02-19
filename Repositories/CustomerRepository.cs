@@ -43,9 +43,16 @@ namespace LiquidApi.Repositories
                 throw new ArgumentException(nameof(lastName));
             }
 
-            return await _context.Customers
+            var customer = await _context.Customers
                 .SingleOrDefaultAsync(x => x.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
                     x.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
+
+            if (customer != null)
+            {
+                customer.Address = await _context.Addresses.SingleAsync(x => x.Id == customer.AddressId);
+            }
+
+            return customer;
         }
 
         public async Task<Customer> GetCustomerByIdAsync(Guid id)
