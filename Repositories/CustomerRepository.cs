@@ -1,33 +1,37 @@
-﻿using LiquidApi.Context;
-using LiquidApi.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+
+using Microsoft.EntityFrameworkCore;
+
+using LiquidApi.Context;
+using LiquidApi.Models;
 
 namespace LiquidApi.Repositories
 {
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
-        private readonly LiquidApiContext context;
+        private readonly LiquidApiContext _context;
 
         public CustomerRepository(LiquidApiContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
-        public List<Address> GetAddressByCountry(string country)
+        public async Task<List<Address>> GetAddressesByCountryAsync(string countryName)
         {
-            if (string.IsNullOrWhiteSpace(country))
+            if (string.IsNullOrWhiteSpace(countryName))
             {
-                throw new ArgumentException(nameof(country));
+                throw new ArgumentException(nameof(countryName));
             }
 
-            return this.context.Addresses
-                .Where(x => x.Country.Equals(country, StringComparison.OrdinalIgnoreCase))
-                .ToList();
+            return await this._context.Addresses
+                .Where(x => x.Country.Equals(countryName, StringComparison.OrdinalIgnoreCase))
+                .ToListAsync();
         }
 
-        public Customer GetCustomerByFirstAndLastName(string firstName, string lastName)
+        public async Task<Customer> GetCustomerByFirstAndLastNameAsync(string firstName, string lastName)
         {
             if (string.IsNullOrWhiteSpace(firstName))
             {
@@ -39,19 +43,20 @@ namespace LiquidApi.Repositories
                 throw new ArgumentException(nameof(lastName));
             }
 
-            return this.context.Customers
-                .SingleOrDefault(x => x.FirstName == firstName && x.LastName == x.LastName);
+            return await _context.Customers
+                .SingleOrDefaultAsync(x => x.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+                    x.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
         }
 
-        public Customer GetCustomerById(Guid id)
+        public async Task<Customer> GetCustomerByIdAsync(Guid id)
         {
             if (id == Guid.Empty)
             {
                 throw new ArgumentException(nameof(id));
             }
 
-            return this.context.Customers
-                .SingleOrDefault(x => x.Id == id);
+            return await _context.Customers
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
     }
 }

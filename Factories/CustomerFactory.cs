@@ -5,7 +5,7 @@ using AddressResponse = LiquidApi.Controllers.Responses.Address;
 
 namespace LiquidApi.Factories
 {
-    public class CustomerFactory
+    public class CustomerFactory : ICustomerFactory
     {
         public CustomerResponse CreateCustomer(Customer customer)
         {
